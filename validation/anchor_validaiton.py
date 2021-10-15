@@ -81,9 +81,9 @@ for index, value in enumerate(feature_names):
 # Apply feature aggregation to anchor dataset
 for key, value in cluster_feature.items():
     value = ["Device_" + x for x in value]
-    anchor_data["&".join(value)] = 0
+    anchor_data["new_" + "&".join(value)] = 0
     for feature in value:
-        anchor_data["&".join(value)] += anchor_data[feature]
+        anchor_data["new_" + "&".join(value)] += anchor_data[feature]
     anchor_data.drop(value, axis=1, inplace=True)
 
 
