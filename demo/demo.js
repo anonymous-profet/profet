@@ -60,9 +60,16 @@ $(function(){
     }
 
 });
-function download(){ //axios 사용해서 anchor instance Test Json File direct download 하는 함수
+function download(testfile){ //axios 사용해서 anchor instance Test Json File direct download 하는 함수
+    if(testfile == 'test-file-a'){
+        url_link = 'https://raw.githubusercontent.com/anonymous-profet/profet/main/demo/src/test_A.json',
+        download_file_name = 'test_A.json'}
+    else{
+        url_link = 'https://raw.githubusercontent.com/anonymous-profet/profet/main/demo/src/test_B.json',
+        download_file_name = 'test_B.json'}
+
     axios({
-        url:'https://raw.githubusercontent.com/anonymous-profet/profet/main/demo/src/test_A.json',
+        url: url_link,
         method:'GET',
         responseType: 'blob'
     })
@@ -70,7 +77,7 @@ function download(){ //axios 사용해서 anchor instance Test Json File direct 
             const url = window.URL.createObjectURL(new Blob([response.data]))
             const link = document.createElement('a')
             link.href = url
-            link.setAttribute('download', 'test_A.json')
+            link.setAttribute('download', download_file_name)
             document.body.appendChild(link)
             link.click()
         })
