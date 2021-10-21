@@ -62,10 +62,10 @@ $(function(){
 });
 function download(testfile){ //axios 사용해서 anchor instance Test Json File direct download 하는 함수
     if(testfile == 'test-file-a'){
-        url_link = 'https://raw.githubusercontent.com/anonymous-profet/profet/main/demo/src/test_A.json',
+        url_link = 'https://raw.githubusercontent.com/anonymous-profet/profet/main/demo/src/test_A.json'
         download_file_name = 'test_A.json'}
     else{
-        url_link = 'https://raw.githubusercontent.com/anonymous-profet/profet/main/demo/src/test_B.json',
+        url_link = 'https://raw.githubusercontent.com/anonymous-profet/profet/main/demo/src/test_B.json'
         download_file_name = 'test_B.json'}
 
     axios({
