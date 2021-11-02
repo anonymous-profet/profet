@@ -299,7 +299,7 @@ let anchorDefaultOption = {
             scalePositionLeft: true,
             title: {
                 display: true,
-                text: 'Latency (ms)',
+                text: 'Latency (us)',
                 font : {
                     size : 14,
                 }
@@ -355,7 +355,7 @@ let scalerDefaultOption = {
         y: {
             title: {
                 display: true,
-                text: 'Latency (ms)',
+                text: 'Latency (us)',
                 font : {
                     size : 14,
                 }
@@ -421,7 +421,7 @@ let anchorOption = {
             scalePositionLeft: true,
             title: {
                 display: true,
-                text: 'Latency (ms)',
+                text: 'Latency (us)',
                 font : {
                     size : 14,
                 }
@@ -483,7 +483,7 @@ let scalerOption = {
         y: {
             title: {
                 display: true,
-                text: 'Latency (ms)',
+                text: 'Latency (us)',
                 font : {
                     size : 14,
                 }
