@@ -39,7 +39,7 @@
                                 Pixel size: 128x128x3<br>
                                 Batch size: 16 batchsize<br>
                                 Anchor instance: g3s.xlarge<br>
-                                Anchor latency: 122.40 ms</p>
+                                Anchor latency: 122.40 us</p>
                         </div>
                         <button class="mdl-button mdl-js-button test-file-download test-file-b" onclick=download('test-file-b')>Test Data B</button>
                         <div class="description-help-tip help-tip-b">
@@ -47,7 +47,7 @@
                                 Pixel size: 128x128x3<br>
                                 Batch size: 256 batchsize<br>
                                 Anchor instance: g3s.xlarge<br>
-                                Anchor latency: 1529.87 ms</p>
+                                Anchor latency: 1529.87 us</p>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                 </div>
                 <!-- Anchor Prediction - Input Anchor Latency -->
                 <div class="input-anchor-latency">
-                    <label for="anchor-latency" class="anchor-label">Anchor Latency (ms)
+                    <label for="anchor-latency" class="anchor-label">Anchor Latency (us)
                         <div class="help-tip">
                             <p>Batch latency for workload measured at your anchor instance. If you enter this value, PROFET predict by median ensemble model with three different models (Simple Linear Regressor, Random Forest, DNN). If you don't, PROFET predict by mean ensemble model with two models (Random Forest, DNN) </p>
                         </div>
@@ -94,7 +94,7 @@
                 <table id="result-table" class="mdl-data-table mdl-js-data-table">
                     <tr class="result-table-head">
                         <th class="mdl-data-table__cell--non-numeric" style="padding: 0 0 8px 10px">Instance<br/>Type</th>
-                        <th>Latency<br/>(ms)</th>
+                        <th>Latency<br/>(us)</th>
                         <th style="text-align: center;padding: 0 10px 8px 0">Cost<br/>(1000 batches)</th>
                     </tr>
                     <tr id="g3s_xlarge" class="result-table-element">
@@ -159,9 +159,9 @@
                 </div>
                 <!-- Scaler Prediction - Input Min Max Latencies -->
                 <div class="input-scaler-minmax">
-                    <label for="latency-min">Latency Min (ms)<p id="min-notice">(16 Batchsize)</p></label>
+                    <label for="latency-min">Latency Min (us)<p id="min-notice">(16 Batchsize)</p></label>
                     <input type="text" placeholder="0.0" id="latency-min">
-                    <label for="latency-max">Latency Max (ms)<p id="max-notice">(256 Batchsize)</p></label>
+                    <label for="latency-max">Latency Max (us)<p id="max-notice">(256 Batchsize)</p></label>
                     <input type="text" placeholder="0.0" id="latency-max">
                 </div>
                 <!-- Scaler Prediction - Submit Button -->
