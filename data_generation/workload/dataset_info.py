@@ -3,8 +3,8 @@ dataset_16 = {
     'img_rows': 16,
     'img_cols': 16,
     'img_channels': 3,
-    'num_data': 500000,
-    'num_test': 100000
+    'num_data': 50000,
+    'num_test': 10000
 }
 
 dataset_32 = {
@@ -12,8 +12,8 @@ dataset_32 = {
     'img_rows': 32,
     'img_cols': 32,
     'img_channels': 3,
-    'num_data': 500000,
-    'num_test': 100000
+    'num_data': 50000,
+    'num_test': 10000
 }
 
 dataset_64 = {
@@ -21,8 +21,8 @@ dataset_64 = {
     'img_rows': 64,
     'img_cols': 64,
     'img_channels': 3,
-    'num_data': 50000,
-    'num_test': 10000
+    'num_data': 5000,
+    'num_test': 1000
 } 
 
 dataset_128 = {
@@ -30,8 +30,8 @@ dataset_128 = {
     'img_rows': 128,
     'img_cols': 128,
     'img_channels': 3,
-    'num_data': 50000,
-    'num_test': 10000
+    'num_data': 5000,
+    'num_test': 1000
 }
 
 dataset_224 = {
@@ -39,8 +39,8 @@ dataset_224 = {
     'img_rows': 224,
     'img_cols': 224,
     'img_channels': 3,
-    'num_data': 20000,
-    'num_test': 5000
+    'num_data': 2000,
+    'num_test': 500
 }
 
 dataset_256 = {
@@ -48,8 +48,8 @@ dataset_256 = {
     'img_rows': 256,
     'img_cols': 256,
     'img_channels': 3,
-    'num_data': 20000,
-    'num_test': 5000
+    'num_data': 2000,
+    'num_test': 500
 }
 
 def select_dataset(dataset_name):
