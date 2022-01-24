@@ -101,7 +101,7 @@ else:
     
 time_now = datetime.now().strftime("%Y%m%d-%H%M%S.%f")
 job_name = f'{args.instance_type}-{args.dataset}-{model_name}-{optimizer}-{batch_size}-{use_gpu_num}-{time_now}'
-logs = f'./logs/{job_name}'
+logs = f'/home/ubuntu/profet/data_generation/logs/{job_name}'
 tboard_callback = tf.keras.callbacks.TensorBoard(log_dir = logs,
                                                  histogram_freq = 1,
                                                  profile_batch = prof_range)
