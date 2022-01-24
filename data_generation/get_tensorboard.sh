@@ -2,7 +2,6 @@
 tensorboard --logdir=./logs &
 sleep 10
 
-INSTANCE_TYPE=$1
 NAME_LIST=$(find ./logs -name *.trace.json.gz)
 
 TB_URL1="http://localhost:6006/data/plugin/profile/data?run="
@@ -17,7 +16,7 @@ do
         TB_URL6=$(echo $NAME | cut -d "/" -f 8 | cut -d "." -f 1)
         TB_URL="$TB_URL1$TB_URL2$TB_URL3$TB_URL4$TB_URL5$TB_URL6$TB_URL7"
         echo $TB_URL
-        FILENAME="./tensorstats/$INSTANCE_TYPE-$TB_URL2$TB_URL4.csv"
+        FILENAME="./tensorstats/$TB_URL2$TB_URL4.csv"
         curl -o $FILENAME $TB_URL
         sleep 1
 done
