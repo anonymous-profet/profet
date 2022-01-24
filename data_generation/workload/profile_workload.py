@@ -112,7 +112,7 @@ class BatchTimeCallback(tf.keras.callbacks.Callback):
         self.all_times = []
 
     def on_train_end(self, logs=None):
-        time_filename = f'/home/ubuntu/profet/data_generation/tensorstats/times-{job_name}'
+        time_filename = f'/home/ubuntu/profet/data_generation/tensorstats/times-{job_name}.pickle'
         time_file = open(time_filename, 'ab')
         pickle.dump(self.all_times, time_file)
         time_file.close()
