@@ -12,5 +12,5 @@ TRAIN_CMD="/home/ubuntu/profet/data_generation/workload/profile_workload.py \
 --use_gpu_num $USING_GPU_NUM --instance_type $INSTANCE_TYPE"
 
 sudo -i -u root bash << EOF
-python3.6 $TRAIN_CMD
+python3.7 $TRAIN_CMD
 EOF
