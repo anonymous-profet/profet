@@ -1,4 +1,5 @@
 from __future__ import division
+
 import six
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import (
@@ -103,7 +104,25 @@ def select_model(model_name, input_shape, num_classes):
         model.add(Dense(units=4096,activation="relu"))
         model.add(Dense(units=num_classes, activation="softmax"))
         return model
-
+    
+    def VGGSmall(input_shape, num_classes):
+        model = tf.keras.models.Sequential()
+        model.add(Conv2D(input_shape=input_shape,
+                         filters=32,kernel_size=(3,3),padding="same", activation="relu"))
+        model.add(Conv2D(filters=32,kernel_size=(3,3),padding="same", activation="relu"))
+        model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+        model.add(Conv2D(filters=64, kernel_size=(3,3), padding="same", activation="relu"))
+        model.add(Conv2D(filters=64, kernel_size=(3,3), padding="same", activation="relu"))
+        model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+        model.add(Conv2D(filters=128, kernel_size=(3,3), padding="same", activation="relu"))
+        model.add(Conv2D(filters=128, kernel_size=(3,3), padding="same", activation="relu"))
+        model.add(MaxPool2D(pool_size=(2,2),strides=(2,2)))
+        model.add(Flatten())
+        model.add(Dense(units=1024,activation="relu"))
+        model.add(Dense(units=1024,activation="relu"))
+        model.add(Dense(units=num_classes, activation="softmax"))
+        return model
+    
     def VGG13(input_shape, num_classes):
         model = tf.keras.models.Sequential()
         model.add(Conv2D(input_shape=input_shape,
@@ -461,6 +480,21 @@ def select_model(model_name, input_shape, num_classes):
         model.add(tf.keras.layers.Activation('softmax'))
         return model
 
+    def FLOWER_CNN(input_shape, num_classes):
+        model = tf.keras.Sequential()
+        model.add(
+            tf.keras.layers.Conv2D(
+                16, 3, padding='same', activation='relu', input_shape=input_shape))
+        model.add(tf.keras.layers.MaxPooling2D())
+        model.add(tf.keras.layers.Conv2D(32, 3, padding='same', activation='relu'))
+        model.add(tf.keras.layers.MaxPooling2D())
+        model.add(tf.keras.layers.Conv2D(64, 3, padding='same', activation='relu'))
+        model.add(tf.keras.layers.MaxPooling2D())
+        model.add(tf.keras.layers.Flatten())
+        model.add(tf.keras.layers.Dense(128, activation='relu'))
+        model.add(tf.keras.layers.Dense(num_classes))
+        return model
+
     def AlexNet(input_shape, num_classes):
         model = tf.keras.Sequential()
         model.add(tf.keras.layers.Conv2D(96,
@@ -531,6 +565,20 @@ def select_model(model_name, input_shape, num_classes):
             classes=num_classes)
         return model
 
+    def Xception(input_shape, num_classes):
+        model = tf.keras.applications.Xception(
+            weights=None,
+            input_shape=input_shape,
+            classes=num_classes)
+        return model
+
+    def EfficientNetB0(input_shape, num_classes):
+        model = tf.keras.applications.EfficientNetB0(
+            weights=None,
+            input_shape=input_shape,
+            classes=num_classes)
+        return model
+
     def MobileNetV2(input_shape, num_classes):
         model = tf.keras.applications.MobileNetV2(
             weights=None,
@@ -540,6 +588,8 @@ def select_model(model_name, input_shape, num_classes):
 
     if model_name == 'LeNet5':
         return LeNet5(input_shape, num_classes)
+    elif model_name == 'VGGSmall':
+        return VGGSmall(input_shape, num_classes)
     elif model_name == 'VGG11':
         return VGG11(input_shape, num_classes)
     elif model_name == 'VGG13':
@@ -560,12 +610,18 @@ def select_model(model_name, input_shape, num_classes):
         return MNIST_CNN(input_shape, num_classes)
     elif model_name == 'CIFAR10_CNN':
         return CIFAR10_CNN(input_shape, num_classes)
+    elif model_name == 'FLOWER_CNN':
+        return FLOWER_CNN(input_shape, num_classes)
     elif model_name == 'AlexNet':
         return AlexNet(input_shape, num_classes)
     elif model_name == 'InceptionV3':
         return InceptionV3(input_shape, num_classes)
     elif model_name == 'InceptionResNetV2':
         return InceptionResNetV2(input_shape, num_classes)
+    elif model_name == 'Xception':
+        return Xception(input_shape, num_classes)
+    elif model_name == 'EfficientNetB0':
+        return EfficientNetB0(input_shape, num_classes)
     elif model_name == 'MobileNetV2':
         return MobileNetV2(input_shape, num_classes)
     else:
