@@ -1,4 +1,15 @@
 //Basic Rendering
+let sampleA, sampleB;
+fetch('./src/test_A.json')
+    .then(response => {
+        return response.json();
+    })
+    .then(jsondata => sampleA = jsondata);
+fetch('./src/test_B.json')
+    .then(response => {
+        return response.json();
+    })
+    .then(jsondata => sampleB = jsondata);
 $(function(){
     // Anchor Submit Action
     $('#ajax-submit').on('click', function(event){
@@ -82,6 +93,66 @@ function download(testfile){ //axios 사용해서 anchor instance Test Json File
             link.click()
         })
 }
+function sampleData(testfile){
+    let formData = new FormData();
+    if(testfile == 'test-file-a'){
+        const str = JSON.stringify(sampleA);
+        const bytes = new TextEncoder().encode(str);
+        const blob = new Blob([bytes], {
+            type: "application/json;charset=utf-8"
+        });
+        let sample = new File([blob], 'test_A.json',{type:"application/json"});
+        formData.append('upload-file', sample);
+        formData.append('anchor_instance', 'g3s_xlarge');
+        formData.append('anchor_latency', 122400);
+    }
+    else {
+        const str = JSON.stringify(sampleB);
+        const bytes = new TextEncoder().encode(str);
+        const blob = new Blob([bytes], {
+            type: "application/json;charset=utf-8"
+        });
+        let sample = new File([blob], 'test_B.json',{type:"application/json"});
+        formData.append('upload-file', sample);
+        formData.append('anchor_instance', 'g3s_xlarge');
+        formData.append('anchor_latency', 1529870);
+    }
+    $.ajax({
+        type: "POST",
+        url: 'https://vxummx2cra.execute-api.us-east-1.amazonaws.com/profet-dev/predict',
+        header: {
+            "Content-Type": "application/json",	//Content-Type 설정
+            "X-HTTP-Method-Override": "POST",
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST',
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Age': 3600
+        },
+        dataType: "json",
+        data: formData,
+        AccessControlAllowOrigin: '*',
+        crossDomain: true,
+        contentType: false,
+        async: false,
+        enctype: 'multipart/form-data',
+        processData: false,
+        success: function (data, status) {
+            let result = data['body']
+            result = result.replace("\"", "");
+            result = result.split('&');
+            for (let j = 0; j < 3; j++) {
+                instanceList[result[j + 3]].latency = Math.round(result[j] * 100) / 100;
+            }
+            showAnchorResult();
+            document.querySelector('.mdl-js-spinner').style.visibility = 'hidden'
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+            $("#btnSubmit").prop("disabled", false);
+            alert(e.message);
+        }
+    });
+}
 // Anchor Prediction 을 위해 ajax 를 통해 File 을 업로드 하는 함수
 // anchorChart 함수를 호출하여 Chart 를 Rendering 함
 function anchorSubmit(){
@@ -89,7 +160,6 @@ function anchorSubmit(){
     let formData = new FormData(form[0]);
     formData.append('anchor_instance', $("#anchor-instance").val());
     formData.append('anchor_latency', $("#anchor-latency").val());
-
     $.ajax({
     type: "POST",
     url: 'https://vxummx2cra.execute-api.us-east-1.amazonaws.com/profet-dev/predict',
@@ -117,7 +187,8 @@ function anchorSubmit(){
             instanceList[result[j + 3]].latency = Math.round(result[j] * 100) / 100;
         }
         showAnchorResult();
-        document.querySelector('.mdl-js-spinner').style.visibility = 'hidden'
+        document.querySelector('.mdl-js-spinner').style.visibility = 'hidden';
+        formData.forEach(e => console.log(e));
     },
     error: function (e) {
         console.log("ERROR : ", e);
